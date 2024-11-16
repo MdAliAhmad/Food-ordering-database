@@ -1,0 +1,76 @@
+-- Create the database for the online food ordering system
+CREATE DATABASE OnlineFoodOrder;
+USE OnlineFoodOrder;
+
+-- Users Table: Stores user information
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    phone_number VARCHAR(15),
+    address TEXT,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Restaurants Table: Holds restaurant details
+CREATE TABLE Restaurants (
+    restaurant_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    location VARCHAR(100),
+    contact_number VARCHAR(15),
+    rating FLOAT,
+    opening_hours VARCHAR(50)
+);
+
+-- Menu_Items Table: Contains food items for each restaurant
+CREATE TABLE Menu_Items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_id INT,
+    name VARCHAR(100),
+    description TEXT,
+    price DECIMAL(10, 2),
+    availability_status ENUM('Available', 'Unavailable') DEFAULT 'Available',
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id) ON DELETE CASCADE
+);
+
+-- Orders Table: Stores order information
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    restaurant_id INT,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    delivery_address TEXT,
+    status ENUM('Pending', 'Completed', 'Canceled') DEFAULT 'Pending',
+    payment_status ENUM('Paid', 'Unpaid') DEFAULT 'Unpaid',
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id) ON DELETE CASCADE
+);
+
+-- Order_Details Table: Tracks individual items within an order
+CREATE TABLE Order_Details (
+    detail_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    item_id INT,
+    quantity INT,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES Menu_Items(item_id) ON DELETE CASCADE
+);
+
+-- Payments Table: Stores payment transactions for each order
+CREATE TABLE Payments (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    payment_method ENUM('Credit Card', 'Debit Card', 'PayPal', 'Cash on Delivery'),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_amount DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE
+);
+
+-- Coupons Table: Stores discount coupons for users
+CREATE TABLE Coupons (
+    coupon_id INT AUTO_INCREMENT PRIMARY KEY,
+    coupon_code VARCHAR(20) UNIQUE,
+    discount_percentage INT,
+    expiry_date DATE
+);

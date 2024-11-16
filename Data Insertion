@@ -1,0 +1,49 @@
+-- Insert users into the Users table
+INSERT INTO Users (name, email, phone_number, address) 
+VALUES ('John Doe', 'john.doe@example.com', '1234567890', '123 Main St');
+
+INSERT INTO Users (name, email, phone_number, address) 
+VALUES ('Alice Smith', 'alice.smith@example.com', '0987654321', '456 Oak Ave');
+
+-- Insert restaurants into the Restaurants table
+INSERT INTO Restaurants (name, location, contact_number, rating, opening_hours) 
+VALUES ('Pizza Palace', 'Downtown', '9876543210', 4.5, '10 AM - 10 PM');
+
+INSERT INTO Restaurants (name, location, contact_number, rating, opening_hours) 
+VALUES ('Burger Shack', 'Uptown', '8765432109', 4.2, '11 AM - 11 PM');
+
+-- Insert menu items into the Menu_Items table
+INSERT INTO Menu_Items (restaurant_id, name, description, price, availability_status) 
+VALUES (1, 'Margherita Pizza', 'Classic pizza with cheese and tomato', 9.99, 'Available');
+
+INSERT INTO Menu_Items (restaurant_id, name, description, price, availability_status) 
+VALUES (1, 'Pepperoni Pizza', 'Pizza topped with pepperoni slices', 12.99, 'Available');
+
+INSERT INTO Menu_Items (restaurant_id, name, description, price, availability_status) 
+VALUES (2, 'Cheeseburger', 'Juicy burger with cheese and toppings', 8.49, 'Available');
+
+-- Insert orders into the Orders table
+INSERT INTO Orders (user_id, restaurant_id, delivery_address, status, payment_status)
+VALUES (1, 1, '123 Main St, Downtown', 'Pending', 'Unpaid');
+
+INSERT INTO Orders (user_id, restaurant_id, delivery_address, status, payment_status)
+VALUES (2, 2, '456 Oak Ave, Uptown', 'Completed', 'Paid');
+
+-- Insert order details into the Order_Details table
+INSERT INTO Order_Details (order_id, item_id, quantity, price) 
+VALUES (1, 1, 2, 9.99);
+
+INSERT INTO Order_Details (order_id, item_id, quantity, price) 
+VALUES (2, 3, 1, 8.49);
+
+-- Insert payment data into the Payments table
+INSERT INTO Payments (order_id, payment_method, payment_amount)
+VALUES (2, 'Credit Card', 8.49);
+
+-- Insert coupons into the Coupons table
+INSERT INTO Coupons (coupon_code, discount_percentage, expiry_date)
+VALUES ('DISCOUNT10', 10, '2024-12-31');
+
+INSERT INTO Coupons (coupon_code, discount_percentage, expiry_date)
+VALUES ('SUMMERSALE', 15, '2024-06-30');
+

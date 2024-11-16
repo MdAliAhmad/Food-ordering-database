@@ -1,0 +1,21 @@
+-- Delete a user from the Users table
+DELETE FROM Users WHERE user_id = 1;
+
+-- Delete a restaurant from the Restaurants table
+DELETE FROM Restaurants WHERE restaurant_id = 2;
+
+-- Delete a menu item from the Menu_Items table
+DELETE FROM Menu_Items WHERE item_id = 3;
+
+-- Delete an order from the Orders table
+DELETE FROM Orders WHERE order_id = 1;
+
+-- Delete an order detail from the Order_Details table
+DELETE FROM Order_Details WHERE detail_id = 2;
+
+-- Delete a payment record from the Payments table
+DELETE FROM Payments WHERE payment_id = 1;
+
+-- Delete a coupon from the Coupons table
+DELETE FROM Coupons WHERE coupon_id = 1;
+
